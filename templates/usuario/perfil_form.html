@@ -1,0 +1,17 @@
+{% extends "sistema.html" %}
+
+{% block system %}
+<!--enctypeatributo le permite especificar un
+ tipo de codificación para su formulario. Hay tres valores posibles
+ multipart/form-data es necesario si sus usuarios deben subir un
+ archivo a través del formulario
+ -->
+  <form method="post" enctype="multipart/form-data">
+    <h2>Insertar perfil</h2>
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="ingresar">
+
+  </form>
+
+{% endblock %}

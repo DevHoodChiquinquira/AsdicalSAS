@@ -1,0 +1,26 @@
+{% extends "sistema.html" %}
+
+{% block system %}
+
+<div class="card" style="width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">número de documento: {{obrero.dni}}</h4>
+
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Nombres: {{obrero.nombre}}</li>
+    <li class="list-group-item">Apellidos:{{obrero.apellido}} </li>
+    <li class="list-group-item">Teléfono: {{obrero.telefono}}</li>
+    <li class="list-group-item">Email: {{obrero.correo}} </li>
+    <li class="list-group-item">Ciudad: {{obrero.ciudad}} </li>
+    <li class="list-group-item">Dirección: {{obrero.direccion}} </li>
+    <li class="list-group-item">Banco: {{obrero.banco}} </li>
+    <li class="list-group-item">Tipo de cuenta: {{obrero.tipoCuenta}} </li>
+    <li class="list-group-item">Numero de cuenta: {{obrero.numeroCuenta}} </li>
+  </ul>
+  <!--<div class="card-body">
+    <button type="button" class="btn btn-dark">Regresar</button>
+  </div>-->
+</div>
+
+{% endblock %}

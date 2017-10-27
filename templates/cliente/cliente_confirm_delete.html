@@ -1,0 +1,10 @@
+{% extends "sistema.html" %}
+
+{% block system %}
+<form method="post">
+	{% csrf_token %}
+    ¿Estás seguro que deseas borrar "{{ object }}"?
+    <input type="submit" value="Borrar" />
+</form>
+
+{% endblock %}

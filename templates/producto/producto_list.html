@@ -1,0 +1,34 @@
+{% extends "sistema.html" %}
+
+{% block system %}
+
+<table class= "table table-striped table-responsive">
+  <thead class="">
+    <tr class="">
+      <th scope="col">Código</th>
+      <th scope="col">Producto</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">IVA</th>
+      <th scope="col">Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for pr in productos %}
+    <tr>
+      <td>{{pr.codigo}}</td>
+      <td>{{pr.producto}}</td>
+      <td>{{pr.cantidad}}</td>
+      <td>{{pr.valorIva}}</td>
+      <td>{{pr.valorVenta}}</td>
+      <td class="bg-info" >
+        <a href="{% url 'producto:producto_detalle' pr.id %}" class="fa fa-eye fa-2x"></a>
+      </td>
+      <td class="bg-warning" >
+        <a href="{% url 'producto:producto_update' pr.id %}"  class="fa fa-pencil-square-o fa-2x"></a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

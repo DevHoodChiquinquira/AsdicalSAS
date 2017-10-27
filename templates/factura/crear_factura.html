@@ -1,0 +1,90 @@
+{% extends "sistema.html" %}
+
+{% block system %}
+
+
+<form method="GET" action="{% url 'factura:search_cliente' %}"  id="c-buscar">
+  <div class="form-row">
+    <div class="form-group col-md-4 ">
+      <label for="inputAddress">Usuario</label>
+      <input type="text" name="dni" class="form-control"  placeholder="Cliente">
+    </div>
+    <div class="form-group col-md-2 ">
+      <label for="inputAddress"></label>
+      <input type="submit" value="Buscar"></input>
+      <!--<button type="submit" class="btn btn-primary fa fa-search mt-4 pt-1 "></button>-->
+    </div>
+    <div class="form-group col-md-6 " id="clientes">
+    </div>
+  </div>
+</form>
+
+
+
+
+
+<h2>Crear obra</h2>
+
+<form>
+  <div class="form-group">
+    <label for="inputAddress">Descripción</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="Descripción de obra">
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4 ">
+      <label for="inputAddress2">Dirección</label>
+      <input type="text" class="form-control" id="inputAddress2" placeholder="Cll o Cr n # n-n">
+    </div>
+    <div class="form-group col-md-4 ">
+      <label for="inputEmail4">Fecha Inicio</label>
+      <input name="fecha" type="date" class="form-control fa fa-calendar" placeholder="30-12-2017"  min="2017-04-01" max="2050-12-20">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputPassword4">fecha Final</label>
+      <input name="fecha" type="date" class="form-control fa fa-calendar" placeholder="30-12-2017" min="2017-04-01" max="2050-12-20">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-3 ">
+      <label for="inputAddress2">Forma de pago</label>
+      <select class="form-control">
+        <option value="efectivo">Efectivo</option>
+        <option value="cheque">Cheque</option>
+        <option value="tarjeta débito">Tarjeta débito</option>
+        <option value="tarjeta crédito">Tarjeta crédito</option>
+        <option value="venta a crédito">Venta a crédito</option>
+        <option value="bono">Bono</option>
+        <option value="vale">Vale</option>
+        <option value="otros">Otros</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3 ">
+      <label for="inputAddress2">IVA</label>
+      <input type="number" min="0" max="1000000000" step="10000" value=0 autocomplete="off" required="required" class="form-control" id="inputAddress2"  >
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputAddress2">Total</label>
+      <input type="number" min="0" max="1000000000" step="10000" value=0 autocomplete="off" required="required" class="form-control" id="inputAddress2"  >
+    </div>
+    <div class="form-group col-md-3 ">
+      <label for="inputAddress2">Estado</label>
+      <select class="form-control">
+        <option value="activo">Activo</option>
+        <option value="finalizado">Finalizado</option>
+      </select>
+    </div>
+  </div>
+
+<!--
+  <div class="input-group date fj-date">
+    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+  </div>-->
+
+
+  <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+
+
+{% endblock %}

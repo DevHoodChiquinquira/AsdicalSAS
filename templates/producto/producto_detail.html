@@ -1,0 +1,22 @@
+{% extends "sistema.html" %}
+
+{% block system %}
+
+<div class="card" style="width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">Código producto: {{producto.codigo}}</h4>
+
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Producto: {{producto.producto}}</li>
+    <li class="list-group-item">Descripcion:{{producto.descripcion}} </li>
+    <li class="list-group-item">Cantidad: {{producto.cantidad}}</li>
+    <li class="list-group-item">IVA: {{producto.valorIva}} </li>
+    <li class="list-group-item">Valor venta: {{producto.valorVenta}} </li>
+  </ul>
+  <!--<div class="card-body">
+    <button type="button" class="btn btn-dark">Regresar</button>
+  </div>-->
+</div>
+
+{% endblock %}

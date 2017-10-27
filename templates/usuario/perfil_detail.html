@@ -1,0 +1,26 @@
+{% extends "sistema.html" %}
+
+{% block system %}
+
+
+<div class="card" style="width: 20rem;">
+  {% if perfil.imagen %}
+    <img class="card-img-top" src="{{perfil.imagen.url}}" alt="imagen de usuario">
+  {% endif %}
+  <div class="card-body">
+    <h4 class="card-title">usuario: {{user.username}}</h4>
+
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">DNI: {{perfil.numeroDocumento}}</li>
+    <li class="list-group-item">Nombre: {{user.first_name}} {{user.last_name}}</li>
+    <li class="list-group-item">Email: {{user.email}}</li>
+    <li class="list-group-item">Teléfono: {{perfil.telefono}}</li>
+    <li class="list-group-item">Dirección: {{perfil.direccion}}</li>
+  </ul>
+  <div class="card-body">
+    <button type="button" class="btn btn-dark">Regresar</button>
+  </div>
+</div>
+
+{% endblock %}

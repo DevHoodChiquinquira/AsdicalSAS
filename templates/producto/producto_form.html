@@ -1,0 +1,12 @@
+{% extends "sistema.html" %}
+
+{% block system %}
+
+  <form method="post" >
+    <h2>Insertar Producto</h2>
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="ingresar">
+  </form>
+
+{% endblock %}
