@@ -28,6 +28,8 @@ from django import http
 import cgi
 #modelos
 from cliente.models import Cliente
+from producto.models import Producto
+from obrero.models import Obrero
 import json
 import decimal
 from django.core import serializers
@@ -49,7 +51,7 @@ def obraCrear(request):
 
 def searchCliente(request):
     dni = request.GET.get('dni')
-    dnis = Cliente.objects.filter(dni__contains=dni)
+    dnis = Cliente.objects.filter(dni=dni)
     dnis = [cliente_serializer(cliente) for cliente in dnis]
     return HttpResponse(json.dumps(dnis), content_type='application/json')
 
@@ -57,3 +59,20 @@ def cliente_serializer(cliente):
     return{'dni':cliente.dni, 'nombreEmpresa':cliente.nombreEmpresa,
            'nombreRepresentante':cliente.nombreRepresentante,
            'apellidoRepresentante':cliente.apellidoRepresentante}
+
+def searchProducto(request):
+    codigo = request.GET.get('codigo')
+    codigos = Producto.objects.filter(codigo=codigo)
+    json = serializers.serialize('json', codigos,
+                                 fields = ('codigo', 'producto',
+                                           'descripcion', 'cantidad'))
+    return HttpResponse(json, content_type='application/json')
+
+
+def searchObrero(request):
+    dni = request.GET.get('dniObrero')
+    dnis = Obrero.objects.filter(dni=dni)
+    json = serializers.serialize('json', dnis,
+                                 fields = ('dni', 'nombre',
+                                           'apellido', 'telefono'))
+    return HttpResponse(json, content_type='application/json')
