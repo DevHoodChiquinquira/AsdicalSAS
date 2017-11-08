@@ -1,0 +1,14 @@
+{% extends "baseStatic.html" %}
+{%load staticfiles%}
+{% block estatico %}
+
+<br>
+		<h1>GALERIA VIDRIO TEMPLADO</h1>
+<br>
+<a class="fancybox" href= "{% static "images/Vidrio/vidrio1.jpeg" %}" data-fancybox-group="gallery" title="Imagen 1"><img src= "{% static "images/Vidrio/v1.png" %}"/></a>
+<a class="fancybox" href= "{% static "images/Vidrio/vidrio2.JPG" %}" data-fancybox-group="gallery" title="Imagen 2"><img src= "{% static "images/Vidrio/v2.png" %}"/></a>
+<a class="fancybox" href= "{% static "images/Vidrio/vidrio3.jpg" %}" data-fancybox-group="gallery" title="Imagen 3"><img src= "{% static "images/Vidrio/v3.png" %}"/></a>
+<a class="fancybox" href= "{% static "images/Vidrio/vidrio4.jpg" %}" data-fancybox-group="gallery" title="Imagen 4"><img src= "{% static "images/Vidrio/v4.png" %}"/></a>
+<a class="fancybox" href= "{% static "images/Vidrio/vidrio5.jpg" %}" data-fancybox-group="gallery" title="Imagen 5"><img src= "{% static "images/Vidrio/v5.png" %}"/></a>
+
+{% endblock %}

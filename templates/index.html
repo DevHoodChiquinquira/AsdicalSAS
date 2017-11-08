@@ -12,140 +12,169 @@
     <link rel="stylesheet" href="{% static "css/bootstrap.css"%}">
     <link rel="stylesheet" href="{% static "css/font-awesome.css"%}">
     <link rel="icon" href="{% static "images/icono.ico" %}" >
-    <style>
-      .slider{
-        background: url({%static "images/Platzi-Stiker.jpeg"%});
-        height: 100vh;/*abarque el 100% dispositivo*/
-        background-size: cover;
-        background-position: center;
-        background-color:gray; opacity:1;
-      }
-    </style>
+
   </head>
   <body>
-    <section class="container-fluid slider d-flex justify-content-center align-items-center" id="inicio">
-      <h5 class="display-3 text-light ">Rafael Romario</h5>
+
+    <section class="container mt-1 pt-1" id="logosdos">
+      <center>
+            <img align=center src={% static "images/logg.jpg"%} alt="Asdical S.A.S logo" border=0>
+      </center>
     </section>
 
-
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="{% url 'usuario:index' %}">
-        <img src= {% static "images/logo.png" %} width="30" height="30" class="d-line-block aling-top" alt="logo romario">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-danger">
+      <a class="navbar-brand" href="{% url 'usuario:index'%}">
+        <img src="{% static "images/logopequeno.png"%}" width="30" height="30" class="d-line-block aling-top" alt="logo Asdical S.A.S">
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+       <strong> <div class="navbar-nav mr-auto text-center">
+          <a class="nav-item- nav-link active text-white" href="{% url 'usuario:index'%}">&nbsp;&nbsp;&nbsp;Inicio&nbsp;</a>
+          <a class="nav-item- nav-link active text-white " href="{% url 'usuario:quienes_somos' %}l">&nbsp;&nbsp;&nbsp;&nbsp;¿Quienes somos?&nbsp;</a>
+           <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;Obras&nbsp;</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'usuario:galeria_aluminio' %}">Aluminio</a>
+              <a class="dropdown-item" href="{% url 'usuario:galeria_drywall' %}">Drywall</a>
+              <a class="dropdown-item" href="{% url 'usuario:galeria_diseno' %}">Diseño de interiores</a>
+              <a class="dropdown-item" href="{% url 'usuario:galeria_domotica' %}">Domótica</a>
+              <a class="dropdown-item" href="{% url 'usuario:galeria_vidrio' %}">Vidrio Templado</a>
 
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <div class="navbar-nav mr-auto text-center">
-          <a class="nav-item- nav-link active" href="{% url 'usuario:index' %}">Inicio</a>
-          <a class="nav-item- nav-link " href="#herramientas">Herramientas</a>
-          <a class="nav-item- nav-link " href="#proyectos">Proyectos</a>
-          <button type="button" onclick="window.location.href={% url 'usuario:autenticacion' %}" class="btn btn-outline-success ml-5 mr-5">Iniciar sesión</button>
-          <button type="button" class="btn btn-outline-danger  ml-5 mr-5">Cerrar Sesión</button>
-        </div>
+            </div>
+          </li>
+          <a class="nav-item- nav-link active text-white " href="">&nbsp;&nbsp;&nbsp;&nbsp;Política de protección de datos&nbsp;</a>
+          <a class="nav-item- nav-link active text-white " href="">&nbsp;&nbsp;&nbsp;&nbsp;Seguridad y salud en el trabajo&nbsp;</a>
+          <a class="nav-item- nav-link active text-white " href="#encuentranos">&nbsp;&nbsp;&nbsp;&nbsp;Encuentranos&nbsp;</a>
+          {% if user.is_authenticated %}
+          <button type="button" onclick="window.location.href='{% url 'usuario:sistema' %}'" class=" text-black btn btn-dark ml-5 mr-5 mt-4 mb-4 fa fa-user-circle"></button>
+          <button type="button" onclick="window.location.href='{% url 'usuario:cerrar_sesion' %}'" class=" text-danger btn btn-dark ml-5 mr-5 mt-4 mb-4">Cerrar Sesión</button>
+          {% else %}
+            <button type="button" onclick="window.location.href='{% url 'usuario:autenticacion' %}'" class=" text-black btn btn-dark ml-5 mr-5 mt-4 mb-4">Iniciar sesión</button>
+          {% endif %}
+        </div></strong>
       </div>
     </nav>
 
+<!--edwin-->
 
-    <!--Jumbroton -->
-    <div class="jumbotron jumbotron-fluid  ">
-      <div class="container">
-        <h1 class="display-4 text-center">Soy un desarrollador de software enfocado en el Backend </h1>
-        <p class="lead text-justify">Mi nombre es Rafael Romario soy una persona apasionada en el desarrollo
-          de soluciones creativas enfocadas en el software. Posee las competencias de construir complejas
-          aplicaciones para individuos y empresas siempre con el enfoque de proveer interfaces intuitivas
-          y de facil uso para que cualquier usuario pueda acceder a la informacion.
-          ¿Está buscando un sitio web de alta calidad para su organización o empresa a un precio competitivo?.</p>
-        </div>
-      </div>
-    <!--Jumbroton end -->
 
-    <!--card-->
-    <section class="container mt-2 pt-2" id="herramientas">
+      <section class="container mt-1 pt-1" id="logosdos">
+          <center>
+                    <img align=center src= {% static "images/logodos.jpg" %}  alt="Logo Tecno Construccion" border=0>
+              </center>
+      </section>
+
+      <section class="container mt-5 pt-2" id="marcas">
+          <div align="center">
+          <a class="fancybox" data-fancybox-group="gallery" title="Alumina"><img src= {% static "images/Marcas/alumina.png" %} /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <a class="fancybox" data-fancybox-group="gallery" title="Apple Homekit"><img src= {% static "images/Marcas/apple.png" %} /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <a class="fancybox" data-fancybox-group="gallery" title="Horus"><img src= {% static "images/Marcas/horus.png" %} /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <a class="fancybox" data-fancybox-group="gallery" title="Panel Rey"><img src= {% static "images/Marcas/panel.png" %} /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <a class="fancybox" data-fancybox-group="gallery" title="Polygal"><img src= {% static "images/Marcas/polygal.PNG" %} /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <a class="fancybox" data-fancybox-group="gallery" title="USG"><img src= {% static "images/Marcas/usg.png" %} /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <a class="fancybox" data-fancybox-group="gallery" title="Vitelsa"><img src= {% static "images/Marcas/vitelsa.png" %} /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <a class="fancybox" data-fancybox-group="gallery" title="Z-Wave"><img src= {% static "images/Marcas/z-wave.png" %} /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+      </section>
+
+
+
+<!--card-->
+    <section class="container mt-5 pt-2" id="obras">
       <div class="card-deck">
         <div class="card">
-          <img class="card-img-top img-fluid" src={% static "images/python-logo.png" %} alt="python logo">
-          <div class="card-body">
-            <h4 class="card-title">¿Por qué usar python?</h4>
-            <p class="card-text">Python es uno de los lenguajes mas populares en la web y es usado por las mejores empresas del mundo.</p>
-            <button type="button" class="btn btn-dark">leer</button>
+          <img class="card-img-top img-fluid" src= {% static "images/drywall.png" %} alt="drywall">
+          <div class="card-body text-center">
+            <h4 class="card-title text-center">Drywall</h4>
+            <p class="card-text text-justify">El Sistema Drywall ha revolucionado nuestros sistemas constructivos convencionales, primero por ser más económico que la construcción tradicional basada en ladrillo y cemento, rapidez en su instalación, liviano de peso, resistente al fuego, térmico, acústico y sísmicamente resistente. </p>
+          </div>
+          <div class="card-footer text-center">
+            <button type="button" onclick="window.location.href='{% url 'usuario:galeria_drywall' %}'" class="btn btn-danger">Ver Galeria</button>
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src={% static "images/django-logo.png" %} alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">¿Django el Framework perfecto de python?</h4>
-            <p class="card-text">Django es usado por empresas como Instagram, The New York times, Nasa Science,
-                National Geographic entre otras.</p>
-            <button type="button" class="btn btn-dark">leer</button>
+          <img class="card-img-top" src= {% static "images/aluminio.png" %} alt="aluminio">
+          <div class="card-body text-center">
+            <h4 class="card-title text-center">Aluminio</h4>
+            <p class="card-text text-justify">El aluminio es un producto con propiedades únicas y gracias a su bajo peso, durabilidad, resistencia a la corrosión y fácil reciclaje, se ha convertido en un producto esencial para la industria de la construcción.</p>
+          </div>
+          <div class="card-footer text-center">
+              <button type="button" onclick="window.location.href='{% url 'usuario:galeria_aluminio' %}'" class="btn btn-danger ">Ver Galeria</button>
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src={% static "images/mstile-310x150.png" %}  alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">¿Qué es bootstrap?</h4>
-            <p class="card-text">Es un poderoso framework desarrollado por Twitter,
-              el cual genera una experiencia mas agradable a tus sitios wev.</p>
-            <button type="button" class="btn btn-dark">leer</button>
+          <img class="card-img-top" src= {% static "images/vidrio.png" %} alt="vidrio">
+          <div class="card-body text-center">
+            <h4 class="card-title text-center">Vidrio Templado</h4>
+            <p class="card-text text-justify">Si bien en construcción es generalmente utilizado en las fachadas
+              y otras áreas exteriores de la obra, también puede ser aprovechado en separaciones
+              interiores. </p>
+
+          </div>
+          <div class="card-footer text-center">
+              <button type="button" onclick="window.location.href='{% url 'usuario:galeria_vidrio' %}'" class="btn btn-danger ">Ver Galeria</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img class="card-img-top" src= {% static "images/diseño.png" %} alt="diseño">
+          <div class="card-body text-center">
+            <h4 class="card-title text-center">Diseño de interiores</h4>
+            <p class="card-text text-justify">Por el uso de la decoración de interiores, los bienes pueden ser transformados en un hogar perfecto para usted y su familia. Antes de considerar lo que quieres hacer, es necesario determinar un presupuesto y atenerse al mismo.</p>
+
+          </div>
+          <div class="card-footer text-center">
+            <button type="button" onclick="window.location.href='{% url 'usuario:galeria_diseno' %}'" class="btn btn-danger ">Ver Galeria</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!--Jumbroton -->
-    <div class="jumbotron jumbotron-fluid bg-dark text-white mt-5" id="proyectos">
-      <div class="container">
-        <h1 class="display-5 text-center">Estos son unos de mis proyectos recientes, me facinaria agregar el tuyo tambien. </h1>
+      <!--card-->
+    <section class="container mt-1 pt-1" id="logosdos">
+      <div class="card">
+        <div class="card-header">
+          <center>
+          <img align=center src= {% static "images/domo.jpg" %} class="img-fluid"  alt="domotica" border=0>
+        </center>
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">Special title treatment</h4>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+        <div class="card-footer text-center">
+          <button type="button" onclick="window.location.href='{% url 'usuario:galeria_domotica' %}'" class="btn btn-danger ">Ver Galeria</button>
         </div>
       </div>
-    <!--Jumbroton end -->
+      </section>
 
-    <!--card-->
-    <section class="container mt-2 pt-2">
-      <div class="card-group">
-        <div class="card">
-          <img class="card-img-top" src={% static "images/aluminios.png" %} alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">aliminiosboyacaje.com</h4>
-            <p class="card-text">Desarrollado en Bootstrap, Python Django.</p>
+      <footer class="container-fluid bg-danger mt-5 pt-2" id="encuentranos">
+        <div class="row text-white py-4 text-white  text-center justify-content-center ">
+          <div class="col-md-4 " >
+              <h6 class="lead"> gerente@asdicalsas.com.co <br><br>
+                  <img src= "{% static "images/qrmuypequeno.png" %}">
+              </h6>
           </div>
-          <div class="card-footer">
-            <button onclick="window.location.href='aluminios.html'" type="button" class="btn btn-dark">leer</button>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card-img-top" src={% static "images/mayorista.png" %} alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">elmayorista.com</h4>
-            <p class="card-text">Desarrollado en Bootstrap, Python Django.</p>
-          </div>
-          <div class="card-footer">
-            <button  type="button" class="btn btn-dark">leer</button>
-          </div>
-        </div>
-      </div>
-    </section>
 
+          <div class="col-md-4 " >
+              <h6 class="lead"> Chiquinquira - Boyaca <br>
+              Carrera 7 14B-05 Ap 103 T5<br>
+              Carrera 7 14-04<br>
+              Telefonos: 313 418 8367 - 312 582 2016
+              </h6>
+          </div>
 
-    <footer class="container-fluid bg-dark mt-5 pt-2">
-      <div class="row text-white py-4 text-white  text-center justify-content-center ">
-        <div class="col-md-4 ">
-          <img src= {% static "images/python-powered-w.svg" %}  alt="logo python powered" width="auto" height="40px" class="rounded mx-auto d-block">
-
+          <div class="col-md-4">
+            <h6 class="lead"> Siguenos</h6>
+            <a href="#"> <span class="fa fa-github fa-2x"></span></a>
+            <a href="#"> <span class="fa fa-twitter fa-2x"></span></a>
+            <a href="#"> <span class="fa fa-facebook fa-2x" ></span></a>
+            <a href="#"> <span class="fa fa-youtube fa-2x"></span></a>
+          </div>
         </div>
-        <div class="col-md-4 " >
-          <a href="https://rafaelromario.com"> &copy; RafaelRomario</a>
-        </div>
-        <div class="col-md-4">
-          <h6 class="lead"> Sigueme</h6>
-          <a href="#"> <span class="fa fa-github fa-2x"></span></a>
-          <a href="#"> <span class="fa fa-twitter fa-2x"></span></a>
-          <a href="#"> <span class="fa fa-facebook fa-2x" ></span></a>
-          <a href="#"> <span class="fa fa-youtube fa-2x"></span></a>
-        </div>
-      </div>
-    </footer>
+      </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS  -->

@@ -61,3 +61,26 @@ def perfilDetail(request, pk):
     template = loader.get_template('usuario/perfil_detail.html')
     context = {'perfil':perfil}
     return HttpResponse(template.render(context, request))
+
+
+
+# vistas de paginas como galerias y de mas
+
+
+def galeriaDrywall(request):
+    return render (request, 'galerias/galeriadrywall.html', {})
+
+def galeriaAluminio(request):
+    return render (request, 'galerias/galeriaaluminio.html', {})
+
+def galeriaVidrio(request):
+    return render (request, 'galerias/galeriavidrio.html', {})
+
+def galeriaDiseno(request):
+    return render (request, 'galerias/galeriadiseno.html', {})
+
+def galeriaDomotica(request):
+    return render (request, 'galerias/galeriadomotica.html', {})
+
+def quienesSomos(request):
+    return render (request, 'informativas/quienessomos.html', {})

@@ -50,7 +50,7 @@
                   </div>
                   <div class="form-group col-md-2 ">
                     <label for="inputAddress"></label>
-                    <button type="submit"  class="btn btn-primary fa fa-search"></button>
+                    <button type="submit"  class="btn btn-danger fa fa-search"></button>
                   </div>
                 </form>
             </div>
@@ -58,7 +58,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button type="button" id="c-seleccionar" class="btn btn-primary">Seleccionar</button>
+              <button type="button" id="c-seleccionar" class="btn btn-danger">Seleccionar</button>
             </div>
           </div>
         </div>
@@ -84,7 +84,7 @@
             </div>
             <div class="form-group col-md-2 ">
               <label for="inputAddress"></label>
-              <button type="submit"  class="btn btn-primary fa fa-search"></button>
+              <button type="submit"  class="btn btn-danger fa fa-search"></button>
             </div>
           </form>
       </div>
@@ -92,7 +92,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" id="p-seleccionar" class="btn btn-primary">Seleccionar</button>
+        <button type="button" id="p-seleccionar" class="btn btn-danger">Seleccionar</button>
       </div>
     </div>
   </div>
@@ -119,7 +119,7 @@
             </div>
             <div class="form-group col-md-2 ">
               <label for="inputAddress"></label>
-              <button type="submit"  class="btn btn-primary fa fa-search"></button>
+              <button type="submit"  class="btn btn-danger fa fa-search"></button>
             </div>
           </form>
       </div>
@@ -127,7 +127,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" id="o-seleccionar" class="btn btn-primary">Seleccionar</button>
+        <button type="button" id="o-seleccionar" class="btn btn-danger">Seleccionar</button>
       </div>
     </div>
   </div>
@@ -139,17 +139,17 @@
 <!-- Botones de modals -->
   <div class="form-row text-center">
     <div class="form-group col-md-4 ">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
          Cliente
       </button>
     </div>
     <div class="form-group col-md-4 ">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ObreroModal">
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ObreroModal">
         Obrero(s)
       </button>
     </div>
     <div class="form-group col-md-4 ">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ProductoModal">
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ProductoModal">
         Productos
       </button>
     </div>
@@ -319,7 +319,7 @@
       </select>
     </div>
   </div>
-  <button type="button" id="o-calcular" class="btn btn-primary">Calcular</button>
+  <button type="button" id="o-calcular" class="btn btn-danger">Calcular</button>
   <!--<button type="submit" class="btn btn-primary">Sign in</button>-->
 </form>
 
@@ -330,7 +330,7 @@
 <form action="/factura/venta" method="post" onsubmit="onEnviar()">
     {% csrf_token %}
     <input id="proceso" name="proceso" type="hidden" />
-    <button class="btn btn-success pull-right" id="comprar"><i class="fa fa-credit-card"></i> Realizar Venta</button>
+    <button class="btn btn-warning pull-right" id="comprar"><i class="fa fa-credit-card"></i> Realizar Venta</button>
 </form>
 <!--Fin Enviar -->
 

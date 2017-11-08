@@ -1,0 +1,16 @@
+{% extends "baseStatic.html" %}
+
+	{%load staticfiles%}
+{% block estatico %}
+
+<br>
+		<h1>GALERIA TRABAJOS EN DISEÑO DE INTERIORES</h1>
+<br>
+<a class="fancybox" href= "{% static "images/Diseno/diseno1.jpeg" %}" data-fancybox-group="gallery" title="Imagen 1"><img src= "{% static "images/Diseno/d1.png" %}"/></a>
+<a class="fancybox" href= "{% static "images/Diseno/diseno2.jpeg" %}" data-fancybox-group="gallery" title="Imagen 2"><img src= "{% static "images/Diseno/d2.png" %}"/></a>
+<a class="fancybox" href= "{% static "images/Diseno/diseno3.JPG" %}" data-fancybox-group="gallery" title="Imagen 3"><img src= "{% static "images/Diseno/d3.png" %}"/></a>
+<a class="fancybox" href= "{% static "images/Diseno/diseno4.JPG" %}" data-fancybox-group="gallery" title="Imagen 4"><img src= "{% static "images/Diseno/d4.png" %}"/></a>
+<a class="fancybox" href= "{% static "images/Diseno/diseno5.jpeg" %}" data-fancybox-group="gallery" title="Imagen 5"><img src= "{% static "images/Diseno/d5.png" %}"/></a>
+<a class="fancybox" href= "{% static "images/Diseno/diseno6.JPG" %}" data-fancybox-group="gallery" title="Imagen 5"><img src= "{% static "images/Diseno/d6.png" %}"/></a>
+
+{% endblock %}

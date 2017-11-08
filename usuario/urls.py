@@ -16,4 +16,11 @@ urlpatterns = [
     url(r'^perfil/detail(?P<pk>[0-9]+)/$', views.perfilDetail,
         name='perfil_detalle'),
     url(r'^logout/$', auth_views.logout, {'next_page':'/'}, name="cerrar_sesion"),
+
+    url(r'^galeria_drywall', views.galeriaDrywall, name='galeria_drywall'),
+    url(r'^galeria_aluminio', views.galeriaAluminio, name='galeria_aluminio'),
+    url(r'^galeria_vidrio', views.galeriaVidrio, name='galeria_vidrio'),
+    url(r'^galeria_diseno', views.galeriaDiseno, name='galeria_diseno'),
+    url(r'^galeria_domotica', views.galeriaDomotica, name='galeria_domotica'),
+    url(r'^quienes_somos', views.quienesSomos, name='quienes_somos'),
 ]
