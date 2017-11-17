@@ -178,7 +178,7 @@ function onEnviar(){
  function sumar()
 
  {
-     var iva=0.19
+     var iva=0.16
      var pValorA=verificar("o-porcentajeA");
      var pValorI=verificar("o-porcentajeI");
      var pValorU=verificar("o-porcentajeU");
@@ -186,14 +186,42 @@ function onEnviar(){
      // realizamos la suma de los valores y los ponemos en la casilla del
      // formulario que contiene el total o-subtotal
 
+     var valorA = vTotal* (pValorA/100);
+     var ValorI = vTotal* (pValorI/100);
+     var ValorU = vTotal* (pValorU/100);
+     var ivaU = ValorU* iva;
+     var subtotal= vTotal-(valorA+ValorI+ValorU+ivaU);
 
-     document.getElementById("o-valorA").value= parseFloat(vTotal)*(parseFloat(pValorA)/100);
-     document.getElementById("o-valorI").value= parseFloat(vTotal)*(parseFloat(pValorI)/100);
-     document.getElementById("o-valorU").value= parseFloat(vTotal)*(parseFloat(pValorU)/100);
+     /*buscar Real*/
+     valorA = subtotal* (pValorA/100);
+     ValorI = subtotal* (pValorI/100);
+     ValorU = subtotal* (pValorU/100);
+     ivaU = ValorU* iva;
+     var totalReal = subtotal+valorA+ValorI+ValorU+ivaU;
 
-     document.getElementById("o-iva").value=(parseFloat(vTotal)*(parseFloat(pValorU)/100))*iva;
+     while (vTotal > totalReal) {
+       subtotal+=2;
+       valorA = subtotal* (pValorA/100);
+       ValorI = subtotal* (pValorI/100);
+       ValorU = subtotal* (pValorU/100);
+       ivaU = ValorU* iva;
+       totalReal = subtotal+valorA+ValorI+ValorU+ivaU;
+     }
 
-     document.getElementById("o-subtotal").value=parseFloat(vTotal)-((parseFloat(vTotal)*(parseFloat(pValorA)/100))+(parseFloat(vTotal)*(parseFloat(pValorI)/100))+(parseFloat(vTotal)*(parseFloat(pValorU)/100))+((parseFloat(vTotal)*(parseFloat(pValorU)/100))*iva));
+
+     document.getElementById("o-valorA").value= valorA;
+     document.getElementById("o-valorI").value= ValorI;
+     document.getElementById("o-valorU").value= ValorU;
+     document.getElementById("o-iva").value= ivaU
+     document.getElementById("o-subtotal").value= subtotal
+
+
+
+
+
+
+
+
  }
  /**
   * Funcion para verificar los valores de los cuadros de texto. Si no es un
