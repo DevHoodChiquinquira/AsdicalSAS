@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l5@o#65h5e1nm$h#hf^h$q4g2=h+1usb^xatqo%65l&&8x+*w!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -123,7 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-
+#requisito de heroku
+STATIC_ROOT = 'staticfiles'
 LOGIN_URL = '/'
 STATICFILES_DIRS= [os.path.join(BASE_DIR,'static')]
 
