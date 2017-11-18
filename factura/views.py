@@ -30,6 +30,8 @@ import cgi
 from cliente.models import Cliente
 from producto.models import Producto
 from obrero.models import Obrero
+from .models import Obra, DetalleObra, DetalleObreroObra
+from .models import Obra as ObraModel
 import json
 import decimal
 from django.core import serializers
@@ -46,8 +48,93 @@ from django.utils import timezone
 
 def obraCrear(request):
     form = None
+    if request.method == 'POST':
+        sid = transaction.savepoint()
+        try:
+            proceso = json.loads(request.POST.get('proceso'))
+            print proceso
+            print("en try")
+            if 'clienProv' not in proceso:
+                msg = 'El cliente no ha sido selecionado'
+                raise Exception(msg)
+            if len(proceso['producto'])<=0:
+                msg = 'No se ha selecionado ningun producto'
+                raise Exception(msg)
+            if len(proceso['obrero']) <=0:
+                msg = 'No selecciono ningun obrero'
+                raise Exception(msg)
+
+            # for k in proceso['producto']:
+            #     print(k['codigo'])
+            #     producto = producto.objects.get(codigo=k['codigo'])
+
+            crearObra = Obra(
+                cliente = Cliente.objects.get(dni = proceso['clienProv']),
+                fecha = timezone.now(),
+                usuario = request.user,
+                descripcion= proceso['descripcion'],
+                direccion= proceso['direccion'],
+                fechaInicio= proceso['fechaInicio'],
+                fechaFinalizacion= proceso['fechaFinal'],
+                porcentajeA= proceso['porcentajeA'],
+                valorA= proceso['valorA'],
+                porcentajeI= proceso['porcentajeI'],
+                valorI= proceso['valorI'],
+                porcentajeU= proceso['porcentajeU'],
+                valorU= proceso['valorU'],
+                formaPago= proceso['tipoPago'],
+                iva= proceso['ivaU'],
+                subtotal= proceso['subtotal'],
+                total= proceso['total'],
+                estado= proceso['estado'],
+            )
+            crearObra.save()
+            print "factura Guardada"
+            print crearObra
+            for k in proceso['producto']:
+                producto = Producto.objects.get(codigo=k['codigo'])
+                print(producto)
+                crearDetalleProducto = DetalleObra(
+                    producto = producto,
+                    usuario = request.user,
+                    descripcion = producto.descripcion,
+                    cantidad = int(k['cantidad']),
+                    fecha = timezone.now(),
+                    obra = crearObra,
+                )
+                crearDetalleProducto.save()
+                print("Despues de crearDetalleProducto")
+            for i in proceso['obrero']:
+                obrero = Obrero.objects.get(dni=i['dni'])
+                print(obrero)
+                crearDetalleObrero = DetalleObreroObra(
+                    obra = crearObra,
+                    obrero = obrero,
+                    usuario = request.user,
+                )
+                crearDetalleObrero.save()
+            messages.success(request, 'La venta se ha realizado')
+        except Exception, e:
+            try:
+                transaction.savepoint_rollback(sid)
+            except:
+                pass
+            messages.error(request, e)
     return render(request, 'factura/crear_factura.html', {} )
 
+
+class ObraList(ListView):
+    model = Obra
+    context_object_name = 'obras'
+    paginate_by = 5
+    #ordenar de mayor a menor
+    def get_queryset(self, *args, **kwargs):
+        qs = super(ObraList, self).get_queryset(*args, **kwargs).order_by("-id")
+        return qs
+    def get_context_data(self, **kwargs):
+        context= super(ObraList, self).get_context_data(**kwargs)
+        context['range'] = range(context["paginator"].num_pages)
+        return context
 
 def searchCliente(request):
     dni = request.GET.get('dni')
@@ -76,3 +163,33 @@ def searchObrero(request):
                                  fields = ('dni', 'nombre',
                                            'apellido', 'telefono'))
     return HttpResponse(json, content_type='application/json')
+
+
+
+#pdf's
+#Funciones de Creacion de PDF
+def write_pdf(template_src, context_dict):
+    template = loader.get_template(template_src)
+    context = Context(context_dict)
+    html = template.render(context)
+    result = StringIO.StringIO()
+    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("utf-8")), result)
+    if not pdf.err:
+        return http.HttpResponse(result.getvalue(),
+                                 content_type = 'application/pdf')
+    return http.HttpResponse('ocurrio un error al generar el reporte %s'% cgi.escape(html))
+
+
+class PdfObra(TemplateView):
+    # permission_required = ('factura.add_factura')
+    def post(self, request, *args, **kwargs):
+        buscar = request.POST['busqueda']
+        print(buscar)
+        obra = Obra.obraActiva.filter(id=buscar)
+        detalleObra = DetalleObra.objects.filter(obra=buscar).order_by("-producto")
+        detalleObreroObra = DetalleObreroObra.objects.filter(obra=buscar)
+
+
+        return write_pdf('factura/obra_Detalle.html',
+                         { 'obra':obra, 'detalleObra':detalleObra, 'pagesize':'A4',
+                          'detalleObreroObra':detalleObreroObra})

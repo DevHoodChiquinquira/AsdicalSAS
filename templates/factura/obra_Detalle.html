@@ -1,0 +1,128 @@
+<\<!DOCTYPE html>
+<html>
+	<head>
+		    {%load staticfiles%}
+		<meta charset="utf-8">
+		<title>Reporte de obra</title>
+	</head>
+	<body>
+
+				<center><h1> ASDICAL S.A.S </h1>
+		    <h6> Chiquinquirá - Boyacá, Carrera 7 14-04</br>
+
+						Telefonos: 313 418 8367 - 312 582 2016</br>
+						Correo: gerente@asdicalsas.com</br>
+						Sitio Web: www.gerente@asdicalsas.com</br>
+				</h6></center></br>
+
+    {% for k in obra %}
+			<center> <h3>CÓDIGO DE OBRA: #{{k.id}} </h3>	</center>
+			<table id="encabezado1" class="table table-bordered table-striped">
+			      <thead>
+			        <tr>
+									 <th style="border:1px solid black; padding: 2px;">Usuario: </br> {{k.usuario.first_name}} {{k.usuario.last_name}} </th>
+			             <th style="border:1px solid black; padding: 2px;">Fecha Registro:</br>  {{k.fecha}} </th>
+			             <th style="border:1px solid black; padding: 2px;">Fecha Inicio Obra:</br>   {{k.fechaInicio}} </th>
+									 <th style="border:1px solid black; padding: 2px;">Fecha finalizacion Obra: </br> {{k.fechaFinalizacion}} </th>
+			        </tr>
+			      </thead>
+			 </table>
+
+			 <table id="encabezado2" class="table table-bordered table-striped">
+						 <thead>
+							 <tr>
+										<th style="border:1px solid black; padding: 2px;">DNI:</br> {{k.cliente}}</th>
+										<th style="border:1px solid black; padding: 2px;">Empresa:</br> {{k.cliente.nombreEmpresa}}</th>
+										<th style="border:1px solid black; padding: 2px;">Nombre representante:</br> {{k.cliente.nombreRepresentante}}</th>
+										<th style="border:1px solid black; padding: 2px;">Apellido representante:</br>  {{k.cliente.apellidoRepresentante}} </th>
+							 </tr>
+						 </thead>
+				</table>
+
+
+			 <table id="encabezado3" class="table table-bordered table-striped">
+						 <thead>
+							 <tr>
+										<th style="border:1px solid black; padding: 2px;">Descripción:</br> {{k.descripcion}}</th>
+										<th style="border:1px solid black; padding: 2px;">Dirección:</br>  {{k.direccion}} </th>
+										<th style="border:1px solid black; padding: 2px;">Telefóno:</br>  {{k.cliente.telefono}} </th>
+							 </tr>
+						 </thead>
+				</table>
+
+				<center><h2>VALOR DE OBRA</h2></center>
+			<table id="encabezado4" class="table table-bordered table-striped">
+						 <thead>
+							 <tr>
+										<th style="border:1px solid black; padding: 2px;">Porcentaje A:</br> {{k.porcentajeA}} </th>
+										<th style="border:1px solid black; padding: 2px;">Valor A:</br> {{k.valorA}} </th>
+										<th style="border:1px solid black; padding: 2px;">Porcentaje I:</br> {{k.porcentajeI}} </th>
+										<th style="border:1px solid black; padding: 2px;">Valor I:</br> {{k.valorI}} </th>
+										<th style="border:1px solid black; padding: 2px;">Porcentaje U:</br> {{k.porcentajeU}} </th>
+										<th style="border:1px solid black; padding: 2px;">Valor U:</br> {{k.valorU}} </th>
+							 </tr>
+						 </thead>
+				</table>
+			<table id="encabezado5" class="table table-bordered table-striped">
+							 <thead>
+								 <tr>
+											<th style="border:1px solid black; padding: 2px;">Forma de pago:</br> {{k.formaPago}} </th>
+											<th style="border:1px solid black; padding: 2px;">iva:</br> {{k.iva}} </th>
+											<th style="border:1px solid black; padding: 2px;">subtotal:</br> {{k.subtotal}} </th>
+											<th style="border:1px solid black; padding: 2px;">Total:</br> {{k.total}} </th>
+											<th style="border:1px solid black; padding: 2px;">Estado:</br> {{k.estado}} </th>
+								 </tr>
+							 </thead>
+			</table>
+		{% endfor %}
+
+	</BR></BR>
+	<center><h3>OBREROS</h2></center>
+		<table id="detalle_obreros" class="table table-bordered table-striped">
+			<thead>
+					<tr>
+						<th style="border:1px solid black; padding: 2px;">DNI</th>
+						<th style="border:1px solid black; padding: 2px;">NOMBRE</th>
+						<th style="border:1px solid black; padding: 2px;">APELLIDO</th>
+						<th style="border:1px solid black; padding: 2px;">TELEFÓNO</th>
+					</tr>
+			</thead>
+			<tbody>
+					{% for o in detalleObreroObra %}
+						<tr>
+							<td align="center" style="border:1px solid black; padding: 2px;">{{o.obrero}}</td>
+							<td align="center" style="border:1px solid black; padding: 2px;">{{o.obrero.nombre}}</td>
+							<td align="center" style="border:1px solid black; padding: 2px;">{{o.obrero.apellido}}</td>
+							<td align="center" style="border:1px solid black; padding: 2px;">{{o.obrero.telefono}}</td>
+						</tr>
+					{% endfor %}
+			</tbody>
+		</table>
+
+
+
+
+	</BR></BR>
+	<center><h3>PRODUCTOS</h2></center>
+		<table id="detalle_factura" class="table table-bordered table-striped">
+	    <thead>
+	        <tr>
+            <th style="border:1px solid black; padding: 2px;">PRODUCTO</th>
+            <th style="border:1px solid black; padding: 2px;">DESCRIPCIÓN</th>
+            <th style="border:1px solid black; padding: 2px;">CANTIDAD</th>
+            <th style="border:1px solid black; padding: 2px;">FECHA</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+		    	{% for p in detalleObra %}
+		    		<tr>
+		    			<td align="center" style="border:1px solid black; padding: 2px;">{{p.producto}}</td>
+		    			<td align="center" style="border:1px solid black; padding: 2px;">{{p.descripcion}}</td>
+		    			<td align="center" style="border:1px solid black; padding: 2px;">{{p.cantidad}}</td>
+		    			<td align="center" style="border:1px solid black; padding: 2px;">{{p.fecha}}</td>
+		    		</tr>
+		    	{% endfor %}
+	    </tbody>
+		</table>
+	</body>
+</html>

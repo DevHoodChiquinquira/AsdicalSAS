@@ -2,6 +2,7 @@
 var proceso = new Object();
 proceso.tipoPro = 1;
 proceso.producto = new Array();
+proceso.obrero = new Array();
 var table = new Array();
 var cliente = new Object();
 
@@ -140,6 +141,7 @@ $(document).ready(function(){
       cell1.setAttribute('align','center');
       cell2.setAttribute('align','center');
       cell3.setAttribute('align','center');
+      proceso.obrero.push({'dni': d[d.length-1].dni});
     })
 
     /*$("#o-calcular").click(function(){
@@ -155,10 +157,38 @@ $(document).ready(function(){
 function onEnviar(){
         //proceso.serie = $('#p-serie').val();
         //proceso.numero = $('#p-num').val();
-        var tipoPago = $("#f-tipoPago").val();
-        var idMaquina = $("#f-maquinaid").val();
+        var descripcion = $("#o-descripcion").val();
+        var direccion = $("#o-direccion").val();
+        var fechaInicio = $("#o-fechaInicio").val();
+        var fechaFinal = $("#o-fechaFinal").val();
+        var porcentajeA = $("#o-porcentajeA").val();
+        var valorA = $("#o-valorA").val();
+        var porcentajeI = $("#o-porcentajeI").val();
+        var valorI = $("#o-valorI").val();
+        var porcentajeU = $("#o-porcentajeU").val();
+        var valorU = $("#o-valorU").val();
+        var tipoPago = $("#o-tipoPago").val();
+        var ivaU = $("#o-iva").val();
+        var subtotal = $("#o-subtotal").val();
+        var total = $("#o-total").val();
+        var estado = $("#o-estado").val();
+
+
+        proceso.descripcion = descripcion;
+        proceso.direccion = direccion;
+        proceso.fechaInicio = fechaInicio;
+        proceso.fechaFinal = fechaFinal;
+        proceso.porcentajeA = porcentajeA;
+        proceso.valorA = valorA;
+        proceso.porcentajeI = porcentajeI;
+        proceso.valorI = valorI;
+        proceso.porcentajeU = porcentajeU;
+        proceso.valorU = valorU;
         proceso.tipoPago = tipoPago;
-        proceso.idMaquina = idMaquina;
+        proceso.ivaU = ivaU;
+        proceso.subtotal = subtotal;
+        proceso.total = total;
+        proceso.estado = estado;
         console.log(JSON.stringify(proceso));
         document.getElementById("proceso").value=JSON.stringify(proceso);
     }

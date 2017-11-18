@@ -10,5 +10,8 @@ urlpatterns = [
     url(r'^searchCliente', views.searchCliente, name='search_cliente'),
     url(r'^searchProducto$', views.searchProducto, name='search_producto'),
     url(r'^searchObrero$', views.searchObrero, name='search_obrero'),
+    url(r'^obra/list$',views.ObraList.as_view(), name='obra_list'),
+    url(r'^obra/Pdf_obra', views.PdfObra.as_view(),
+        name='reporte_Detalle_Obra'),
 
 ]

@@ -182,7 +182,7 @@
 
 <h2>Datos básicos de obra</h2>
 
-<form>
+
   <div class="form-group">
     <label for="inputAddress">Descripción</label>
     <input type="text" class="form-control" id="o-descripcion" placeholder="Descripción de obra">
@@ -311,25 +311,23 @@
     </div>
     <div class="form-group col-md-2">
       <label for="inputAddress2">Total</label>
-      <input type="text" onkeyup="sumar();" id="o-total" min="0" max="1000000000" step="10000" value=0 autocomplete="off" required="required" class="form-control" id="inputAddress2"  >
+      <input type="text" maxlength="10" onkeyup="sumar();" id="o-total" min="0" max="1000000000" step="10000" value=0 autocomplete="off" required="required" class="form-control" id="inputAddress2"  >
     </div>
     <div class="form-group col-md-3 ">
       <label for="inputAddress2">Estado</label>
-      <select id="o-estado" class="form-control">
+      <select id="o-estado" class="form-control" id="o-estado">
         <option value="activo">Activo</option>
         <option value="finalizado">Finalizado</option>
       </select>
     </div>
   </div>
-  <button type="button" id="o-calcular" class="btn btn-danger">Calcular</button>
-  <!--<button type="submit" class="btn btn-primary">Sign in</button>-->
-</form>
+
 
 
 
 
 <!--Enviar -->
-<form action="/factura/venta" method="post" onsubmit="onEnviar()">
+<form action="{% url 'factura:obra_crear' %}" method="post" onsubmit="onEnviar()">
     {% csrf_token %}
     <input id="proceso" name="proceso" type="hidden" />
     <button class="btn btn-warning pull-right" id="comprar"><i class="fa fa-credit-card"></i> Realizar Venta</button>
@@ -337,7 +335,14 @@
 <!--Fin Enviar -->
 
 
-
+{% if user.is_authenticated %}
+    {% if messages %}{% for message in messages %}
+      <div class="alert alert-danger alert-dismissable">
+      <i class="fa fa-info"></i>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <b>Alert!</b> {{ message }}
+      </div>
+  {% endfor %}{% endif %}{% endif %}
 
 
 
