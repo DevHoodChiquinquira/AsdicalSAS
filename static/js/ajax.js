@@ -208,7 +208,7 @@ function onEnviar(){
  function sumar()
 
  {
-     var iva=0.16
+     var iva=0.19
      var pValorA=verificar("o-porcentajeA");
      var pValorI=verificar("o-porcentajeI");
      var pValorU=verificar("o-porcentajeU");

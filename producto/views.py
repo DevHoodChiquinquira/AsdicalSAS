@@ -11,25 +11,35 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
-class ProductoInsert(CreateView):
+#Permisos
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin, PermissionRequiredMixin)
+from django.contrib.auth.decorators import (
+    login_required, permission_required)
+
+class ProductoInsert(LoginRequiredMixin, PermissionRequiredMixin,
+                     CreateView):
+    permission_required = ('producto.add_producto')
     model = Producto
     success_url = reverse_lazy('producto:producto_listar')
     fields = ['codigo', 'producto', 'descripcion', 'cantidad',
               'valorVenta' ,]
 
-class ProductoList(ListView):
+class ProductoList(LoginRequiredMixin, ListView):
     model = Producto
     context_object_name = 'productos'
 
-class ProductoUpdate(UpdateView):
+class ProductoUpdate(LoginRequiredMixin, PermissionRequiredMixin,
+                     UpdateView):
+    permission_required = ('producto.change_producto')
     model = Producto
     success_url = reverse_lazy('producto:producto_listar')
     fields = ['codigo', 'producto', 'descripcion', 'cantidad',
               'valorVenta' ,]
 
+@login_required()
 def productoDetail(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
     template = loader.get_template('producto/producto_detail.html')
     context = {'producto':producto}
     return HttpResponse(template.render(context, request))
-    

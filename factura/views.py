@@ -44,8 +44,13 @@ from django.template import Context
 from .forms import RangoForm
 from django.utils import timezone
 
-# Create your views here.
-
+#Permisos
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin, PermissionRequiredMixin)
+from django.contrib.auth.decorators import (
+    login_required, permission_required)
+@login_required()
+@permission_required('factura.add_obra')
 def obraCrear(request):
     form = None
     if request.method == 'POST':
@@ -123,7 +128,9 @@ def obraCrear(request):
     return render(request, 'factura/crear_factura.html', {} )
 
 
-class ObraList(ListView):
+class ObraList(LoginRequiredMixin, PermissionRequiredMixin,
+               ListView):
+    permission_required = ('factura.add_obra')
     model = Obra
     context_object_name = 'obras'
     paginate_by = 5
@@ -136,6 +143,7 @@ class ObraList(ListView):
         context['range'] = range(context["paginator"].num_pages)
         return context
 
+@login_required()
 def searchCliente(request):
     dni = request.GET.get('dni')
     dnis = Cliente.objects.filter(dni=dni)
@@ -147,6 +155,7 @@ def cliente_serializer(cliente):
            'nombreRepresentante':cliente.nombreRepresentante,
            'apellidoRepresentante':cliente.apellidoRepresentante}
 
+@login_required()
 def searchProducto(request):
     codigo = request.GET.get('codigo')
     codigos = Producto.objects.filter(codigo=codigo)
@@ -155,7 +164,7 @@ def searchProducto(request):
                                            'descripcion', 'cantidad'))
     return HttpResponse(json, content_type='application/json')
 
-
+@login_required()
 def searchObrero(request):
     dni = request.GET.get('dniObrero')
     dnis = Obrero.objects.filter(dni=dni)
@@ -180,7 +189,7 @@ def write_pdf(template_src, context_dict):
     return http.HttpResponse('ocurrio un error al generar el reporte %s'% cgi.escape(html))
 
 
-class PdfObra(TemplateView):
+class PdfObra(LoginRequiredMixin, TemplateView):
     # permission_required = ('factura.add_factura')
     def post(self, request, *args, **kwargs):
         buscar = request.POST['busqueda']

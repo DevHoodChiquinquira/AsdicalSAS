@@ -10,8 +10,6 @@ urlpatterns = [
     url(r'^cliente/list', views.ClienteList.as_view(), name='cliente_listar'),
     url(r'^cliente/update(?P<pk>[0-9]+)/$', views.ClienteUpdate.as_view(),
         name='cliente_update'),
-    url(r'^cliente/delete(?P<pk>[0-9]+)/$', views.ClienteDelete.as_view(),
-        name='cliente_delete'),
     url(r'^cliente/detail(?P<pk>[0-9]+)/$', views.clienteDetail,
         name='cliente_detalle'),
 

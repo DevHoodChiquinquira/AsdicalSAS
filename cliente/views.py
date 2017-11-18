@@ -10,9 +10,15 @@ from .models import Cliente
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+#Permisos
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin, PermissionRequiredMixin)
+from django.contrib.auth.decorators import (
+    login_required, permission_required)
 
-
-class ClienteInsert(CreateView):
+class ClienteInsert(LoginRequiredMixin, PermissionRequiredMixin,
+                    CreateView):
+    permission_required = ('cliente.add_cliente')
     model = Cliente
     success_url = reverse_lazy('cliente:cliente_listar')
     fields = ['dni', 'nombreEmpresa', 'nombreRepresentante',
@@ -20,7 +26,9 @@ class ClienteInsert(CreateView):
               'ciudad', 'direccion', 'banco', 'tipoCuenta',
               'numeroCuenta', ]
 
-class ClienteUpdate(UpdateView):
+class ClienteUpdate(LoginRequiredMixin, PermissionRequiredMixin,
+                    UpdateView):
+    permission_required = ('cliente.change_cliente')
     model = Cliente
     success_url = reverse_lazy('cliente:cliente_listar')
     fields = ['dni', 'nombreEmpresa', 'nombreRepresentante',
@@ -28,14 +36,13 @@ class ClienteUpdate(UpdateView):
               'ciudad', 'direccion', 'banco', 'tipoCuenta',
               'numeroCuenta', ]
 
-class ClienteList(ListView):
+class ClienteList(LoginRequiredMixin, PermissionRequiredMixin,
+                  ListView):
+    permission_required = ('cliente.add_cliente')
     model = Cliente
     context_object_name = 'clientes'
 
-class ClienteDelete(DeleteView):
-    model = Cliente
-    success_url = reverse_lazy('cliente:cliente_listar')
-
+@login_required()
 def clienteDetail(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
     template = loader.get_template('cliente/cliente_detail.html')

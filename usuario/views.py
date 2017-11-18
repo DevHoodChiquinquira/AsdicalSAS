@@ -10,8 +10,14 @@ from .forms import PerfilForm
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+#Permisos
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin, PermissionRequiredMixin)
+from django.contrib.auth.decorators import (
+    login_required, permission_required)
 
 # Create your views here.
+
 def authentication(request):
     if request.method == 'POST':
         action = request.POST.get('action', None)
@@ -31,7 +37,9 @@ def authentication(request):
 def systemIndex(request):
     return render (request, 'sistema.html', {})
 
-class PerfilInsert(CreateView):
+class PerfilInsert(LoginRequiredMixin, PermissionRequiredMixin,
+                   CreateView):
+    permission_required = ('usuario.add_perfil')
     model = Perfil
     success_url = reverse_lazy('usuario:perfil_listar')
     fields = ['numeroDocumento', 'telefono', 'direccion',
@@ -40,7 +48,9 @@ class PerfilInsert(CreateView):
         form.instance.user = self.request.user
         return super(PerfilInsert, self).form_valid(form)
 
-class PerfilUpdate(UpdateView):
+class PerfilUpdate(LoginRequiredMixin, PermissionRequiredMixin,
+                   UpdateView):
+    permission_required = ('usuario.change_perfil')
     model = Perfil
     success_url = reverse_lazy('usuario:perfil_listar')
     fields = ['numeroDocumento', 'telefono', 'direccion',
@@ -49,13 +59,13 @@ class PerfilUpdate(UpdateView):
         form.instance.user = self.request.user
         return super(PerfilUpdate, self).form_valid(form)
 
-class PerfilList(ListView):
+class PerfilList(LoginRequiredMixin ,ListView):
     model = Perfil
     context_object_name = 'perfiles'
     def get_queryset(self):
         return Perfil.objects.filter(user=self.request.user)
 
-
+@login_required()
 def perfilDetail(request, pk):
     perfil = get_object_or_404(Perfil, pk=pk)
     template = loader.get_template('usuario/perfil_detail.html')
