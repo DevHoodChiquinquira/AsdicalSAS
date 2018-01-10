@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="{% static "css/bootstrap.css"%}">
     <link rel="stylesheet" href="{% static "css/font-awesome.css"%}">
-    <link rel="icon" href="{% static "images/icono1.ico" %}" >
+    <link rel="icon" href="{% static "images/logopequeno.png" %}" >
     <style>
       .slider{
         background: url({%static "images/Platzi-Stiker.jpeg"%});
@@ -31,7 +31,7 @@
   <body>
 
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-danger">
-      <a class="navbar-brand" href="{% url 'usuario:index'%}">
+      <a class="navbar-brand" href="{% url 'usuario:sistema'%}">
         <img src="{% static "images/logopequeno.png" %}" width="30" height="30" class="d-line-block aling-top" alt="logo Asdical">
         {{user.username}}
       </a>
@@ -41,8 +41,6 @@
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <div class="navbar-nav mr-auto text-center">
-          <a class="nav-item- nav-link active fa fa-home" href="sistema.html"></a>
-          <a class="nav-item- nav-link active fa fa-user-circle" href=""></a>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Perfil</a>
             <div class="dropdown-menu">
@@ -91,28 +89,32 @@
       {% endblock %}
     </section>
 
-    <footer class="container-fluid bg-danger mt-5 pt-2" id="encuentranos">
+    <footer class="container-fluid bg-danger  mt-5 pt-4" id="encuentranos">
       <div class="row text-white py-4 text-white  text-center justify-content-center ">
         <div class="col-md-4 " >
-            <a href="mailto:gerente@asdicalsas.com.co" class="lead"><span class="label">gerente@asdicalsas.com.co</span></a></br></br>
-                <img src= "{% static "images/qrmuypequeno.png" %}">
-
+            <a href="mailto:gerente@asdicalsas.com.co" class="lead"><span class="label">gerente@asdicalsas.com.co</span></a></br>
+            <a href="mailto:soporte@asdicalsas.com.co" class="lead"><span class="label">soporte@asdicalsas.com.co</span></a></br></br>
+                <img src= {% static "images/qrmuypequeno.png" %}
+            </h6>
+            <br><br>
         </div>
 
         <div class="col-md-4 " >
-            <h6 class="lead"> Chiquinquirá - Boyacá <br>
-            Carrera 7 14B-05 Ap 103 T5<br>
-            Carrera 7 14-04<br>
-            Telefonos: 313 418 8367 - 312 582 2016
-            </h6>
+          <h6 class="lead"> Chiquinquirá - Boyacá <br>
+          Carrera 7 14-04<br>
+          Carrera 7 14B-05 Ap 103 T5<br>
+          </h6>
+          <h6 class="fa fa-volume-control-phone fa-2x"></h6> <span class="lead"> : 312 582 2016</span></br>
+          <h6 class="fa fa-whatsapp fa-2x"></h6> <span class="lead"> : 313 418 8367</span>
+          </br></br>
         </div>
 
         <div class="col-md-4">
           <h6 class="lead"> Siguenos</h6>
-          <a href="https://www.facebook.com/Asdical-SAS-382185988905705/" target="_blank" > <span class="fa fa-facebook fa-4x" ></span></a>
-        </div>
+          <a href="https://www.facebook.com/Asdical-SAS-382185988905705/" target="_blank" > <span class="fa fa-facebook-official fa-3x" ></span></a></br></br></br>
       </div>
     </footer>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS  la que sigue es de otro proyect-->
 

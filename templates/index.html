@@ -32,9 +32,18 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
        <strong> <div class="navbar-nav mr-auto text-center">
           <a class="nav-item- nav-link active text-white" href="{% url 'usuario:index'%}">&nbsp;&nbsp;&nbsp;Inicio&nbsp;</a>
-          <a class="nav-item- nav-link active text-white " href="{% url 'usuario:quienes_somos' %}l">&nbsp;&nbsp;&nbsp;&nbsp;¿Quienes somos?&nbsp;</a>
-           <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;Obras&nbsp;</a>
+          <a class="nav-item- nav-link active text-white " href="l">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+          <li class="nav-item dropdown">
+         <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;coorporativo&nbsp;</a>
+           <div class="dropdown-menu">
+             <a class="dropdown-item" href="{% url 'usuario:quienes_somos' %}">¿Quienes somos?</a>
+           </div>
+         </li>
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;Proyectos&nbsp;</a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="{% url 'usuario:galeria_aluminio' %}">Aluminio</a>
               <a class="dropdown-item" href="{% url 'usuario:galeria_drywall' %}">Drywall</a>
@@ -44,16 +53,18 @@
 
             </div>
           </li>
-          <a class="nav-item- nav-link active text-white " href="">&nbsp;&nbsp;&nbsp;&nbsp;Política de protección de datos&nbsp;</a>
-          <a class="nav-item- nav-link active text-white " href="">&nbsp;&nbsp;&nbsp;&nbsp;Seguridad y salud en el trabajo&nbsp;</a>
+
+          <li class="nav-item dropdown">
+         <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;coorporativo&nbsp;</a>
+           <div class="dropdown-menu">
+             <a class="dropdown-item" href="{% url 'usuario:quienes_somos' %}">Política de protección de datos</a>
+             <a class="dropdown-item" href="{% url 'usuario:quienes_somos' %}">Seguridad y salud en el trabajo</a>
+           </div>
+         </li>
+
           <a class="nav-item- nav-link active text-white " href="#encuentranos">&nbsp;&nbsp;&nbsp;&nbsp;Encuentranos&nbsp;</a>
-          <a class="nav-item- nav-link active text-white fa fa-envelope fa-3x" href="https://corporativo.mi.com.co/"  target="_blank">&nbsp;</a>
-          {% if user.is_authenticated %}
-          <button type="button" onclick="window.location.href='{% url 'usuario:sistema' %}'" class=" text-black btn btn-dark ml-5 mr-5 mt-4 mb-4 fa fa-user-circle"></button>
-          <button type="button" onclick="window.location.href='{% url 'usuario:cerrar_sesion' %}'" class=" text-danger btn btn-dark ml-5 mr-5 mt-4 mb-4">Cerrar Sesión</button>
-          {% else %}
-            <button type="button" onclick="window.location.href='{% url 'usuario:autenticacion' %}'" class=" text-black btn btn-dark ml-5 mr-5 mt-4 mb-4">Iniciar sesión</button>
-          {% endif %}
+
+
         </div></strong>
       </div>
     </nav>
@@ -152,26 +163,29 @@
       </div>
       </section>
 
-      <footer class="container-fluid bg-danger mt-5 pt-2" id="encuentranos">
+      <footer class="container-fluid bg-danger  pt-4" id="encuentranos">
         <div class="row text-white py-4 text-white  text-center justify-content-center ">
           <div class="col-md-4 " >
-              <a href="mailto:gerente@asdicalsas.com.co" class="lead"><span class="label">gerente@asdicalsas.com.co</span></a></br></br>
-                  <img src= "{% static "images/qrmuypequeno.png" %}">
-
+              <a href="mailto:gerente@asdicalsas.com.co" class="lead"><span class="label">gerente@asdicalsas.com.co</span></a></br>
+              <a href="mailto:soporte@asdicalsas.com.co" class="lead"><span class="label">soporte@asdicalsas.com.co</span></a></br></br>
+                  <img src= {% static "images/qrmuypequeno.png" %}
+              </h6>
+              <br><br>
           </div>
 
           <div class="col-md-4 " >
-              <h6 class="lead"> Chiquinquirá - Boyacá <br>
-              Carrera 7 14B-05 Ap 103 T5<br>
-              Carrera 7 14-04<br>
-              Telefonos: 313 418 8367 - 312 582 2016
-              </h6>
+            <h6 class="lead"> Chiquinquirá - Boyacá <br>
+            Carrera 7 14-04<br>
+            Carrera 7 14B-05 Ap 103 T5<br>
+            </h6>
+            <h6 class="fa fa-volume-control-phone fa-2x"></h6> <span class="lead"> : 312 582 2016</span></br>
+            <h6 class="fa fa-whatsapp fa-2x"></h6> <span class="lead"> : 313 418 8367</span>
+            </br></br>
           </div>
 
           <div class="col-md-4">
             <h6 class="lead"> Siguenos</h6>
-            <a href="https://www.facebook.com/Asdical-SAS-382185988905705/" target="_blank" > <span class="fa fa-facebook fa-4x" ></span></a>
-          </div>
+            <a href="https://www.facebook.com/Asdical-SAS-382185988905705/" target="_blank" > <span class="fa fa-facebook-official fa-3x" ></span></a></br></br></br>
         </div>
       </footer>
 
