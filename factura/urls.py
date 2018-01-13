@@ -13,5 +13,7 @@ urlpatterns = [
     url(r'^obra/list$',views.ObraList.as_view(), name='obra_list'),
     url(r'^obra/Pdf_obra', views.PdfObra.as_view(),
         name='reporte_Detalle_Obra'),
+    url(r'^obra/add_producto', views.ProductoAdd.as_view(),
+        name='add_producto')
 
 ]

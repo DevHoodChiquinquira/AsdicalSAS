@@ -41,7 +41,7 @@ from django.db import transaction
 from django.contrib import messages
 from django.template import RequestContext as ctx
 from django.template import Context
-from .forms import RangoForm
+from .forms import RangoForm, FilterEstado
 from django.utils import timezone
 
 #Permisos
@@ -49,6 +49,16 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin, PermissionRequiredMixin)
 from django.contrib.auth.decorators import (
     login_required, permission_required)
+
+#class para agregar un producto a una obra activa - form.py
+class ProductoAdd(CreateView):
+    template_name = 'factura/detalleobra_form.html'
+    form_class = FilterEstado
+    success_url = reverse_lazy('factura:obra_list')
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super(ProductoAdd, self).form_valid(form)
+
 @login_required()
 @permission_required('factura.add_obra')
 def obraCrear(request):

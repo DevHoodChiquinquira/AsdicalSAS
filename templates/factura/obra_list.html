@@ -29,6 +29,7 @@
       <th scope="col">Vendedor</th>
       <th scope="col">Cliente</th>
       <th scope="col">Total</th>
+
     </tr>
   </thead>
   <tbody>
@@ -40,6 +41,9 @@
       <td>{{pr.usuario}}</td>
       <td>{{pr.cliente}}</td>
       <td>{{pr.total}}</td>
+      <td class="bg-success" >
+          <a href=""  class="fa fa-shopping-cart fa-2x"></a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
