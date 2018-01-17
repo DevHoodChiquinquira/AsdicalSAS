@@ -1,4 +1,5 @@
-from .models import DetalleObra, Obra # Change as necessary
+from .models import DetalleObra, Obra, DetalleObreroObra # Change as necessary
+from obrero.models import Obrero
 from django.forms import ModelForm
 from django import forms
 
@@ -17,3 +18,13 @@ class FilterEstado(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(FilterEstado, self).__init__(*args, **kwargs)
         self.fields['obra'].queryset = Obra.obraActiva.filter(estado="activo")
+
+class FilterEstadoObrero(forms.ModelForm):
+    class Meta:
+        model = DetalleObreroObra
+        fields = ['obra','obrero',]
+
+    def __init__(self, *args, **kwargs):
+        super(FilterEstadoObrero, self).__init__(*args, **kwargs)
+        self.fields['obra'].queryset = Obra.obraActiva.filter(estado="activo")
+        

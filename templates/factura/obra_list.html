@@ -41,8 +41,8 @@
       <td>{{pr.usuario}}</td>
       <td>{{pr.cliente}}</td>
       <td>{{pr.total}}</td>
-      <td class="bg-success" >
-          <a href=""  class="fa fa-shopping-cart fa-2x"></a>
+      <td class="bg-warning" >
+          <a href="{% url 'factura:obra_update' pr.id %}"  class="fa fa-pencil-square-o fa-2x"></a>
       </td>
     </tr>
     {% endfor %}

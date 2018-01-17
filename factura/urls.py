@@ -14,6 +14,10 @@ urlpatterns = [
     url(r'^obra/Pdf_obra', views.PdfObra.as_view(),
         name='reporte_Detalle_Obra'),
     url(r'^obra/add_producto', views.ProductoAdd.as_view(),
-        name='add_producto')
+        name='add_producto'),
+    url(r'^obra/add_obrero', views.ObreroAdd.as_view(),
+        name='add_obrero'),
+    url(r'^obra/update(?P<pk>[0-9]+)/$', views.ObraUpdate.as_view(),
+        name='obra_update'),
 
 ]

@@ -41,7 +41,7 @@ from django.db import transaction
 from django.contrib import messages
 from django.template import RequestContext as ctx
 from django.template import Context
-from .forms import RangoForm, FilterEstado
+from .forms import RangoForm, FilterEstado, FilterEstadoObrero
 from django.utils import timezone
 
 #Permisos
@@ -58,6 +58,22 @@ class ProductoAdd(CreateView):
     def form_valid(self, form):
         form.instance.usuario = self.request.user
         return super(ProductoAdd, self).form_valid(form)
+
+
+class ObraUpdate(UpdateView):
+    model = Obra
+    fields = ['descripcion', 'direccion', 'fechaInicio', 'fechaFinalizacion',
+              'formaPago', 'estado',]
+    success_url = reverse_lazy('factura:obra_list')
+
+class ObreroAdd(CreateView):
+    template_name = 'factura/detalleobra_form.html'
+    form_class = FilterEstadoObrero
+    success_url = reverse_lazy('factura:obra_list')
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super(ObreroAdd, self).form_valid(form)
+
 
 @login_required()
 @permission_required('factura.add_obra')
