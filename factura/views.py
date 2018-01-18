@@ -52,6 +52,7 @@ from django.contrib.auth.decorators import (
 
 #class para agregar un producto a una obra activa - form.py
 class ProductoAdd(CreateView):
+    permission_required = ('factura.change_detalleobra')
     template_name = 'factura/detalleobra_form.html'
     form_class = FilterEstado
     success_url = reverse_lazy('factura:obra_list')
@@ -61,12 +62,14 @@ class ProductoAdd(CreateView):
 
 
 class ObraUpdate(UpdateView):
+    permission_required = ('factura.change_obra')
     model = Obra
     fields = ['descripcion', 'direccion', 'fechaInicio', 'fechaFinalizacion',
               'formaPago', 'estado',]
     success_url = reverse_lazy('factura:obra_list')
 
 class ObreroAdd(CreateView):
+    permission_required = ('factura.add_detalleobreroobra')
     template_name = 'factura/detalleobra_form.html'
     form_class = FilterEstadoObrero
     success_url = reverse_lazy('factura:obra_list')
