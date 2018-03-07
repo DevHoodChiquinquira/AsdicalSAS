@@ -41,7 +41,7 @@ from django.db import transaction
 from django.contrib import messages
 from django.template import RequestContext as ctx
 from django.template import Context
-from .forms import RangoForm, FilterEstado, FilterEstadoObrero
+from .forms import RangoForm, FilterEstado, FilterEstadoObrero#, FiltroEstadoObreros
 from django.utils import timezone
 
 #Permisos
@@ -49,6 +49,9 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin, PermissionRequiredMixin)
 from django.contrib.auth.decorators import (
     login_required, permission_required)
+
+
+
 
 #class para agregar un producto a una obra activa - form.py
 class ProductoAdd(CreateView):
@@ -70,12 +73,70 @@ class ObraUpdate(UpdateView):
 
 class ObreroAdd(CreateView):
     permission_required = ('factura.add_detalleobreroobra')
-    template_name = 'factura/detalleobra_form.html'
+    template_name = 'factura/addobrero_form.html'
     form_class = FilterEstadoObrero
     success_url = reverse_lazy('factura:obra_list')
     def form_valid(self, form):
         form.instance.usuario = self.request.user
         return super(ObreroAdd, self).form_valid(form)
+
+from django.http import JsonResponse
+
+def searchObreroSelect(request):
+    # if request.is_ajax():
+    select_Obra = request.GET.get("obra")
+    print(select_Obra)
+    print("codigo")
+    lista_obrero= Obrero.objects.exclude(detalleobreroobra__obra__id=select_Obra)
+    json = serializers.serialize('json', lista_obrero,fields = ( 'id', 'dni', 'nombre','apellido'))
+    print (json)
+    return HttpResponse(json, content_type='application/json')
+    # else:
+    #     return HttpResponse("Solo ajax")
+    # select_Obra = request.GET.get('select_Obra')
+    # print(selectObra)
+    # lista_obrero= Obrero.objects.none()
+    # options = '<option value="" selected="selected">---------</option>'
+    # if select_Obra:
+    #     lista_obrero= Obrero.objects.exclude(detalleobreroobra__obra__id=select_Obra)
+    # for obrero in lista_obrero:
+    #     options += '<option value="%s">%s</option>' % (
+    #         obrero.pk,
+    #         obrero.nombre
+    #     )
+    # response = {}
+    # response['lista_obrero'] = options
+    # return HttpResponse(json.dumps(response), content_type='application/json')aca terminaba
+    # lista_obrero= Obrero.objects.exclude(detalleobreroobra__obra__id=selectObras)
+    # result = []
+    # auxiliar = []
+    # print(lista_obrero)
+
+    # for obrero in lista_obrero:
+    #     obrero_json={}
+    #     obrero_json['id']=obrero.id
+    #     # obrero_json['dni']= obrero.dni
+    #     # obrero_json['nombre'] = obrero.nombre
+    #     auxiliar.append(obrero_json)
+    # for i in auxiliar:
+    #     if i not in result:
+    #         result.append(i)
+    # data = json.dumps(result)
+    #
+    #
+    #
+    # return HttpResponse(data, mimetype)
+
+
+
+# def addObreros(request):
+#     form = FiltroEstadoObreros()
+#     if request.method == 'POST':
+#         form = FiltroEstadoObreros(request.POST)
+#         if form.is_valid():
+#             success_url = reverse_lazy('factura:obra_list')
+#     return render (request, 'factura/addobreros_form.html',
+#                    {'form':form})
 
 
 @login_required()
@@ -91,12 +152,13 @@ def obraCrear(request):
             if 'clienProv' not in proceso:
                 msg = 'El cliente no ha sido selecionado'
                 raise Exception(msg)
-            if len(proceso['producto'])<=0:
-                msg = 'No se ha selecionado ningun producto'
-                raise Exception(msg)
-            if len(proceso['obrero']) <=0:
-                msg = 'No selecciono ningun obrero'
-                raise Exception(msg)
+            # if len(proceso['producto'])<=0:
+            #     msg = 'No se ha selecionado ningun producto'
+            #     raise Exception(msg)
+            # if len(proceso['obrero']) <=0:
+            #     msg = 'No selecciono ningun obrero'
+            #     raise Exception(msg)
+            #hasta aca era lo de obligatorio
 
             # for k in proceso['producto']:
             #     print(k['codigo'])

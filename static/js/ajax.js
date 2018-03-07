@@ -6,7 +6,45 @@ proceso.obrero = new Array();
 var table = new Array();
 var cliente = new Object();
 
+
+
+
+
 $(document).ready(function(){
+
+  $("#id_obra_o").change( function(e){
+    e.preventDefault();
+    selectObra=$(this).val();
+    // alert(selectObra);
+    
+
+      $.ajax({
+        url:'/factura/searchObreroSelect',
+        type: 'GET',
+        data:$(this).serialize(),
+
+        success: function(json){
+          // Agregamos los resultados al select
+          // console.log(json);
+          // console.log(json.length);
+          // alert(json.length)
+          var html = ""
+          $("#instalador").html("");
+          $("#instalador").append("<option value=''>-Select-</option>");
+          for(var i=0;i<json.length;i++)
+          {
+            html += 'DNI: '+json[i].pk + '<br>';
+            html += 'nombre : '+json[i].fields.dni + '<br>';
+            html += 'apellido : '+json[i].fields.apellido + '<br>';
+            $("#instalador").append("<option value='"+json[i].pk+"'>"+json[i].fields.nombre+" "+ json[i].fields.apellido+"</option>");
+
+
+          }
+          $('#contenido').html(html);
+
+        }
+      })
+  });
 
 
   $('#c-buscar').submit(function(e){
@@ -21,7 +59,7 @@ $(document).ready(function(){
         for (var i = 0; i < json.length; i++) {
           html += 'DNI: '+json[i].dni + '<br>';
           html += 'Empresa : '+json[i].nombreEmpresa + '<br>';
-          html += 'Nombre representante : '+json[i].nombreRepresentante + '<br>';
+          html += 'Nombre representanted : '+json[i].nombreRepresentante + '<br>';
           html += 'Nombre Apellidos: '+json[i].apellidoRepresentante + '<br>';
 
           cliente.dni = json[i].dni;
@@ -149,6 +187,8 @@ $(document).ready(function(){
     })*/
 
 
+
+
 })//principal
 
 //funciones aparte
@@ -206,59 +246,50 @@ function onEnviar(){
   */
 
  function sumar()
+  {
+       var iva=0.19
+       var pValorA=verificar("o-porcentajeA");
+       var pValorI=verificar("o-porcentajeI");
+       var pValorU=verificar("o-porcentajeU");
+       var vTotal=verificar("o-total");
+       // realizamos la suma de los valores y los ponemos en la casilla del
+       // formulario que contiene el total o-subtotal
 
- {
-     var iva=0.19
-     var pValorA=verificar("o-porcentajeA");
-     var pValorI=verificar("o-porcentajeI");
-     var pValorU=verificar("o-porcentajeU");
-     var vTotal=verificar("o-total");
-     // realizamos la suma de los valores y los ponemos en la casilla del
-     // formulario que contiene el total o-subtotal
+       var valorA = vTotal* (pValorA/100);
+       var ValorI = vTotal* (pValorI/100);
+       var ValorU = vTotal* (pValorU/100);
+       var ivaU = ValorU* iva;
+       var subtotal= vTotal-(valorA+ValorI+ValorU+ivaU);
 
-     var valorA = vTotal* (pValorA/100);
-     var ValorI = vTotal* (pValorI/100);
-     var ValorU = vTotal* (pValorU/100);
-     var ivaU = ValorU* iva;
-     var subtotal= vTotal-(valorA+ValorI+ValorU+ivaU);
-
-     /*buscar Real*/
-     valorA = subtotal* (pValorA/100);
-     ValorI = subtotal* (pValorI/100);
-     ValorU = subtotal* (pValorU/100);
-     ivaU = ValorU* iva;
-     var totalReal = subtotal+valorA+ValorI+ValorU+ivaU;
-
-     while (vTotal > totalReal) {
-       subtotal+=2;
+       /*buscar Real*/
        valorA = subtotal* (pValorA/100);
        ValorI = subtotal* (pValorI/100);
        ValorU = subtotal* (pValorU/100);
        ivaU = ValorU* iva;
-       totalReal = subtotal+valorA+ValorI+ValorU+ivaU;
+       var totalReal = subtotal+valorA+ValorI+ValorU+ivaU;
+
+       while (vTotal > totalReal) {
+         subtotal+=2;
+         valorA = subtotal* (pValorA/100);
+         ValorI = subtotal* (pValorI/100);
+         ValorU = subtotal* (pValorU/100);
+         ivaU = ValorU* iva;
+         totalReal = subtotal+valorA+ValorI+ValorU+ivaU;
+       }
+
+
+       document.getElementById("o-valorA").value= valorA;
+       document.getElementById("o-valorI").value= ValorI;
+       document.getElementById("o-valorU").value= ValorU;
+       document.getElementById("o-iva").value= ivaU
+       document.getElementById("o-subtotal").value= subtotal
      }
-
-
-     document.getElementById("o-valorA").value= valorA;
-     document.getElementById("o-valorI").value= ValorI;
-     document.getElementById("o-valorU").value= ValorU;
-     document.getElementById("o-iva").value= ivaU
-     document.getElementById("o-subtotal").value= subtotal
-
-
-
-
-
-
-
-
- }
  /**
   * Funcion para verificar los valores de los cuadros de texto. Si no es un
   * valor numerico, cambia de color el borde del cuadro de texto
   */
  function verificar(id)
- {
+  {
      var obj=document.getElementById(id);
      if(obj.value=="")
          value="0";
@@ -274,7 +305,7 @@ function onEnviar(){
          obj.style.borderColor="#f00";
          return 0;
      }
- }
+   }
  /**
   * Funcion para validar el importe
   * Tiene que recibir:
@@ -285,7 +316,7 @@ function onEnviar(){
   *  false-Incorrecto
   */
  function validate_importe(value,decimal)
- {
+  {
      if(decimal==undefined)
          decimal=0;
      if(decimal==1)
@@ -301,4 +332,13 @@ function onEnviar(){
          return true;
      }
      return false;
- }
+   }
+
+
+   /*
+function selectPecio(){
+     var selectedValue = document.getElementById("instalador").value;
+     console.log(selectedValue);
+     alert("valor: "+selectedValue);
+  document.getElementById("p-valorVenta").value=selectedValue;
+}*/

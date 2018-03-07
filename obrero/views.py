@@ -22,10 +22,10 @@ class ObreroInsert(LoginRequiredMixin,
                    PermissionRequiredMixin, CreateView):
     permission_required = ('obrero.add_obrero')
     model = Obrero
-    success_url = reverse_lazy('cliente:obrero_listar')
     fields = ['dni', 'nombre', 'apellido', 'telefono', 'correo',
               'ciudad', 'direccion', 'banco', 'tipoCuenta',
               'numeroCuenta', ]
+    success_url = reverse_lazy('obrero:obrero_listar')
 
 class ObreroList(LoginRequiredMixin, PermissionRequiredMixin,
                  ListView):

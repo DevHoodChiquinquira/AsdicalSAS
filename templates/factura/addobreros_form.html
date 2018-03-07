@@ -1,0 +1,20 @@
+{% extends "sistema.html" %}
+
+{% block system %}
+
+  <form method="POST" >
+    {% csrf_token %}
+    <h2>Agregar instalador - Obreros </h2>
+    <div class="">
+        {{form.obra.label_tag}}
+        {{form.obra}}
+    </div>
+    <div class="">
+        {{form.obrero.label_tag}}
+        {{form.obrero}}
+    </div>
+<!-- -->
+    <button type="submit">Guardar</button>
+  </form>
+
+{% endblock %}

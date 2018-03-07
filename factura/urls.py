@@ -19,5 +19,10 @@ urlpatterns = [
         name='add_obrero'),
     url(r'^obra/update(?P<pk>[0-9]+)/$', views.ObraUpdate.as_view(),
         name='obra_update'),
+    url(r'^searchObreroSelect$', views.searchObreroSelect,
+        name="search_Obrero_Select"),
+    # url(r'^add_obreros$', views.addObreros, name="add_obreros"),
+
+    # url(r'^add_obrero$', views.addObrero, name="addObrero"),
 
 ]

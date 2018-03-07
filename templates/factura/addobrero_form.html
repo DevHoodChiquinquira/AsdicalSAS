@@ -1,0 +1,27 @@
+{% extends "sistema.html" %}
+{%load staticfiles%}
+{% block system %}
+
+<form method="GET" action="#">
+
+    <h2>Agregar instaladores </h2>
+
+
+
+    {{form.obra.label_tag}}
+    {{form.obra}}
+
+    <select id="instalador" name="instalador" class="custom-select">
+
+    </select>
+    <hr>
+    <button type="submit"  class="btn btn-danger fa fa-search"></button>
+
+
+</form>
+
+<div class="" id="contenido">
+
+</div>
+
+{% endblock %}
