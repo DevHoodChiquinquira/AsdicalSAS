@@ -16,7 +16,7 @@ $(document).ready(function(){
     e.preventDefault();
     selectObra=$(this).val();
     // alert(selectObra);
-    
+
 
       $.ajax({
         url:'/factura/searchObreroSelect',
@@ -29,18 +29,18 @@ $(document).ready(function(){
           // console.log(json.length);
           // alert(json.length)
           var html = ""
-          $("#instalador").html("");
-          $("#instalador").append("<option value=''>-Select-</option>");
+          $("#id_obrero").html("");
+          $("#id_obrero").append("<option value=''>-Select-</option>");
           for(var i=0;i<json.length;i++)
           {
             html += 'DNI: '+json[i].pk + '<br>';
             html += 'nombre : '+json[i].fields.dni + '<br>';
             html += 'apellido : '+json[i].fields.apellido + '<br>';
-            $("#instalador").append("<option value='"+json[i].pk+"'>"+json[i].fields.nombre+" "+ json[i].fields.apellido+"</option>");
+            $("#id_obrero").append("<option value='"+json[i].pk+"'>"+json[i].fields.nombre+" "+ json[i].fields.apellido+"</option>");
 
 
           }
-          $('#contenido').html(html);
+          /*$('#contenido').html(html);*/
 
         }
       })

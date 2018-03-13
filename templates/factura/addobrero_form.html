@@ -2,26 +2,25 @@
 {%load staticfiles%}
 {% block system %}
 
-<form method="GET" action="#">
-
+<form method="post">
+  {% csrf_token %}
     <h2>Agregar instaladores </h2>
 
 
 
     {{form.obra.label_tag}}
     {{form.obra}}
+    {{form.obrero.label_tag}}
+    {{form.obrero}}
 
-    <select id="instalador" name="instalador" class="custom-select">
-
-    </select>
     <hr>
-    <button type="submit"  class="btn btn-danger fa fa-search"></button>
+    <button type="submit"  class="btn btn-danger"> Guardar</button>
 
 
 </form>
 
-<div class="" id="contenido">
+<!--<div class="" id="contenido">
 
-</div>
+</div>-->
 
 {% endblock %}

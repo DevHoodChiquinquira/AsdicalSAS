@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from .models import DetalleObra, Obra, DetalleObreroObra # Change as necessary
 from obrero.models import Obrero
 from django.forms import ModelForm
@@ -36,50 +37,32 @@ class FilterEstadoObrero(forms.ModelForm):
         super(FilterEstadoObrero, self).__init__(*args, **kwargs)
         self.fields['obra'].queryset = Obra.obraActiva.filter(estado="activo")
         self.fields['obra'].widget.attrs.update({"class":"custom-select", 'id':'id_obra_o', 'name':'id_obra_o' })
+        #self.fields['obrero'].queryset = Obrero.objects.none()
+        self.fields['obrero'].widget.attrs.update({"class":"custom-select" })
 
 
-
-
-
-        # obrass = Obra.obraActiva.filter(estado="activo")
-        # obrassS = obrass[0]
-        # # obrerosIns = Obrero.objects.all()
-        # # obrerosInss= obrerosIns[0]
-        # print obrassS
-        # print "algo"
-        # # son = DetalleObreroObra.objects.select_related().filter(obra=obrassS).exclude(obrero=obrerosInss)
-        # son = DetalleObreroObra.objects.select_related().filter(obra=obrassS)
-        # # son = DetalleObreroObra.objects.all()
-        # sons= son[1]
-        # print(sons)
-        # print("nananananana")
-        # obrerosIns = Obrero.objects.select_related().exclude(dni=sons.obrero)
-        # # obrerosIns = Obrero.objects.select_related().exclude(dni=sons)
-        # # obrerosInss= obrerosIns[0]
-        # # print(obrerosInss)
-        # self.fields['obrero'].queryset = obrerosIns
-
-
-# class FiltroEstadoObreros(forms.Form):
-#     obra = forms.ModelChoiceField(
-#         label = u'Obra0',
-#         queryset=Obra.obraActiva.all()
-#     )
-#     obrero = forms.ModelChoiceField(
-#         label=u'Obrero',
-#         queryset=Obrero.objects.all()
-#     )
-#     widget = {
-#                 'obrero' : forms.RadioSelect(attrs={'class':'custom-select','id':'id_obrero'}),
-#                 'obra' : forms.Select(attrs={'class': 'custom-select', 'id':'id_obra'}),
-#             }
-#     def __init__(self, *args, **kwargs):
-#         super(FiltroEstadoObreros, self).__init__(*args, **kwargs)
-#         self.fields['obra'].queryset = Obra.obraActiva.filter(estado="activo")
-#         self.fields['obrero'].queryset = Obrero.objects.filter(dni="1")
-#
-#     #
-#     # def __init__(self, *args, **kwargs):
-#     #     super(UbicacionForm, self).__init__(*args, **kwargs)
-#     #     self.fields['municipio'].queryset = Municipio.objects.none()
-#     #     self.fields['localidad'].queryset = Localidad.objects.none()
+class ModificarObra(forms.ModelForm):
+    class Meta:
+        model = Obra
+        fields = ['descripcion','direccion','fechaInicio',
+                  'fechaFinalizacion', 'porcentajeA', 'valorA',
+                  'porcentajeI', 'valorI', 'porcentajeU', 'valorU',
+                  'formaPago', 'iva', 'subtotal', 'total', 'estado',]
+        # labels = {
+        #     'descripcion' : 'Descripción ',
+        #     'direccion' : 'Dirección',
+        #     'fechaInicio' : 'Fecha Inicio',
+        #     'fechaFinalizacion' : 'Fecha Finalización',
+        #     'porcentajeA' : 'Porcentaje A',
+        #     'valorA' : 'Valor A',
+        #     'porcentajeI' : 'Porcentaje I',
+        #     'valorI' : 'Valor I',
+        #     'porcentajeU' : 'Porcentaje U',
+        #     'valorU' : 'Valor U',
+        #     'formaPago' : 'Forma de pago', 'iva': 'IVA',
+        #     'subtotal': 'Sub-Total', 'total' : 'Total',
+        #     'estado' : 'Estado', }
+        # widget = {
+        # }
+    def __init__(self, *args, **kwargs):
+        super(ModificarObra, self).__init__(*args, **kwargs)
